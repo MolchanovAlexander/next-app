@@ -379,7 +379,7 @@ export const menu: Menu = [
     id: 2,
     slug: "burgers",
     title: "Juicy Burgers",
-    desc: "Burger Bliss: Juicy patties, bold flavors, and gourmet toppings galore.",
+    desc: "Burger Bliss: Juicy patties, bold flavors, and gourmet toppings galore lorem ipsum dolorem guflorem ipsum dolorem lorem ipsum doloremlorem ipsum dolorem guflorem ipsum dolorem guf guflorem ipsum dolorem gufguflorem ipsum dolorem guflorem ipsum dolorem guf.",
     img: "/temporary/m2.png",
     color: "black",
   },
