@@ -16,3 +16,9 @@ export type ProductType = {
     price: number;
     options?: { title: string; additionalPrice: number }[];
   };
+
+  /*
+  git push https://github.com/MolchanovAlexander/next-app.git
+  Username: MolchanovAlexander
+  Password: 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
+  */
