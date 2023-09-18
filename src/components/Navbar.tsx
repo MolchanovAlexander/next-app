@@ -2,6 +2,7 @@ import Link from "next/link"
 import Menu from "./Menu"
 import CartIcon from "./CartIcon";
 import Image from "next/image";
+import UserLinks from "./UserLinks";
 
 export default function Navbar() {
   const user = false;
@@ -28,15 +29,11 @@ export default function Navbar() {
       {/* Right Links */}
       <div className="hidden md:flex gap-4 items-center justify-end flex-1">
         <div className="md:absolute top-3 r-2 lg:static flex items-center gap-2
-         cursor-pointer bg-orange-300 px-1 rounded-md w-[180px]">
+         cursor-pointer bg-orange-300 px-1 rounded-md justify-center w-[168px]">
           <Image src="/phone.png" alt="" width={20} height={20}/>
           <div>0958756262</div>
         </div>
-        {!user
-          ? <Link href="/login">Login</Link>
-          :
-          <Link href="/orders">Orders</Link>
-        }
+        <UserLinks />
         <CartIcon />
 
       </div>
