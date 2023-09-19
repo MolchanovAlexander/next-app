@@ -15,10 +15,21 @@ export type ProductType = {
     img?: string;
     price: number;
     options?: { title: string; additionalPrice: number }[];
-  };
-
-  /*
-  git push https://github.com/MolchanovAlexander/next-app.git
-  Username: MolchanovAlexander
-  Password: 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
-  */
+};
+export type OrderType = {
+    id: string;
+    userEmail: string;
+    price: number;
+    products: CartItemType[];
+    status: string;
+    createdAt: Date;
+    intent_id: String;
+};
+export type CartItemType = {
+    id: string;
+    title: string;
+    img?: string;
+    price: number;
+    optionTitle?: string;
+    quantity: number;
+};
