@@ -39,11 +39,3 @@ export const POST = async (req: NextRequest) => {
     );
   }
 };
-
-// // fetch
-// export const GET =()=> {
-//     return new NextResponse(":noob", {status:200}) 
-// }
-// export const POST =()=> {
-//     return new NextResponse(":noob", {status:200}) 
-// }

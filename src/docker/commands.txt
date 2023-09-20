@@ -1,0 +1,13 @@
+ 
+---how i does backup copy of db
+
+sudo docker exec -t docker-db-1 pg_dumpall -c -U gufrip > dump.sql
+
+// stackowerflow said:
+ docker exec -t your-db-container pg_dumpall -c -U your-db-user > dump_$(date +%Y-%m-%d_%H_%M_%S).sql
+
+
+----how to make copy
+cat your_dump.sql | docker exec -i your-db-container psql -U your-db-user -d your-db-name
+it will be for me 
+cat dump.sql | docker exec -i docker-db-1 psql -U gufrip -d mydb
