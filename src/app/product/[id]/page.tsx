@@ -1,6 +1,6 @@
 import Price from "@/components/Price";
 import { ProductType } from "@/types/types";
-
+import DeleteButton from "@/components/DeleteButton"
 import Image from "next/image";
 import React from "react";
 
@@ -39,6 +39,7 @@ const SingleProductPage = async ({params}:{params:{id:string}}) => {
         <p>{singleProduct.desc}</p>
         <Price product={singleProduct}/>
       </div>
+      <DeleteButton id={singleProduct.id} />
     </div>
   );
 };
