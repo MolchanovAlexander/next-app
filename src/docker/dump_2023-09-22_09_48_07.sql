@@ -349,9 +349,9 @@ clmq5d0tp0000hjcbv5xi6act	2023-09-19 10:03:03.61	19.0000000000000000000000000000
 --
 
 COPY public."Product" (id, "createdAt", title, "desc", img, price, "isFeatured", options, "catSlug") FROM stdin;
-clmj28md70000hjqjx0mq2nhj	2023-09-14 11:01:16.08	pizza1	desc guf rip dskfjdfjgbgjbgjgbgb gbgb	\N	22.000000000000000000000000000000	t	{}	pizzas
-clmj2amm80002hjqj7wcypm3k	2023-09-14 11:02:49.856	burger1	burger dno 	\N	74.000000000000000000000000000000	t	{}	burgers
 clmj29lho0001hjqjo8nzazgx	2023-09-14 11:02:01.74	Sicilian	Description of this dung22222 grgdffewpeoor	/temporary/p1.png	33.000000000000000000000000000000	f	{"{\\"title\\": \\"small\\", \\"additionalPrice\\": 0}","{\\"title\\": \\"medium\\", \\"additionalPrice\\": 2}","{\\"title\\": \\"large\\", \\"additionalPrice\\": 3}"}	pizzas
+clmsus3si0000hjs0mdoczmf8	2023-09-21 07:30:10.086	Burger3	desc b3	/temporary/p5.png	12.000000000000000000000000000000	t	{"{\\"title\\": \\"small\\", \\"additionalPrice\\": 0}","{\\"title\\": \\"dno\\", \\"additionalPrice\\": 1}"}	burgers
+clmsutasn0001hjs07ox7da8g	2023-09-21 07:31:05.832	pasta goya	desfrfrfrfr	/temporary/p4.png	32.000000000000000000000000000000	t	{}	pastas
 \.
 
 

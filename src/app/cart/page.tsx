@@ -8,8 +8,10 @@ const CartPage = () => {
 
   useEffect(()=>{
     useCartStore.persist.rehydrate()
+    
   },[])
-
+  
+  
   return (
     <div className="h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)]
      flex flex-col text-red-500 lg:flex-row">
@@ -42,7 +44,7 @@ const CartPage = () => {
       <div className="h-1/2 p-4 bg-fuchsia-50 flex flex-col gap-4 justify-center lg:h-full lg:w-1/3 2xl:w-1/2 lg:px-20 xl:px-40 2xl:text-xl 2xl:gap-6">
         <div className="flex justify-between">
           <span className="">Subtotal ({totalItems} items)</span>
-          <span className="">${totalPrice}</span>
+          <span className="">${(totalPrice)}</span>
         </div>
         <div className="flex justify-between">
           <span className="">Service Cost</span>

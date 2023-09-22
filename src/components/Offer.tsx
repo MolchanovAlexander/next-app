@@ -1,6 +1,18 @@
 import Image from "next/image";
 import React from "react";
-import CountDown from "./CountDown";
+//import CountDown from "./CountDown"; issues the error text did not match (second on server 13 on client side 14)
+// from https://nextjs.org/docs/messages/react-hydration-error this is the solution
+import dynamic from 'next/dynamic'
+ 
+const CountDownNoSSR = dynamic(() => import('./CountDown'), { ssr: false })
+ 
+export  function CountDown() {
+  return (
+    <div>
+      <CountDownNoSSR />
+    </div>
+  )
+}
 
 const Offer = () => {
   return (
