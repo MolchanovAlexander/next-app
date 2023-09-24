@@ -20,7 +20,7 @@ const Price = ({ product }: { product: ProductType }) => {
   useEffect(() => {
     if (product.options?.length) {
       setTotal(
-        quantity * product.price + product.options[selected].additionalPrice
+        +quantity * +product.price + product.options[selected].additionalPrice
       );
     }
   }, [quantity, selected, product]);
@@ -36,6 +36,8 @@ const Price = ({ product }: { product: ProductType }) => {
       }),
       quantity: quantity,
     })
+    console.log("prise is  ",typeof(total));
+    
     toast.success("The product added to the cart!")
   }
   return (

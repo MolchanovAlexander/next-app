@@ -1,7 +1,6 @@
 import { ActionTypes, CartType } from "@/types/types";
 import { create } from "zustand";
-import { devtools,persist } from "zustand/middleware";
-import zukeeper from 'zukeeper';
+import { devtools, persist } from "zustand/middleware";
 
 declare global {
   interface Window {
@@ -27,32 +26,32 @@ export const useCartStore = create(
         const totalP = get().totalPrice;
         const productsLength = products.length
         const toi = get().totalItems
-        console.log(typeof(totalP) + " add " + productsLength +  " toi - " + toi);
+        console.log(typeof (totalP) + " add " + productsLength + " toi - " + toi);
 
-        const productInState = products.find(
-          (product) => product.id === item.id
-        );
+        const productInState = products.find((product) => product.id === item.id);
 
         if (productInState) {
+          console.log(productInState.id);
+          
           const updatedProducts = products.map((product) =>
             product.id === productInState.id
               ? {
                 ...item,
-                quantity: item.quantity + product.quantity,
+                quantity: +item.quantity + product.quantity,
                 price: +item.price + product.price,
               }
               : item
           );
           set((state) => ({
             products: updatedProducts,
-            totalItems: state.totalItems + item.quantity,
+            totalItems: +state.totalItems + item.quantity,
             totalPrice: +state.totalPrice + item.price,
           }));
         } else {
 
           set((state) => ({
             products: [...state.products, item],
-            totalItems: state.totalItems + item.quantity,
+            totalItems: +state.totalItems + item.quantity,
             totalPrice: +state.totalPrice + item.price,
           }));
 
@@ -63,19 +62,19 @@ export const useCartStore = create(
         const totalP = get().totalPrice;
         const toi = get().totalItems
         const productsLength = products.length
-         console.log(typeof(totalP) + " remove "+  productsLength+  " toi - " + toi);
+        console.log(typeof (totalP) + " remove " + productsLength + " toi - " + toi);
 
-        if(productsLength === 1){
-            console.log("0000 starts");
-            
+        if (productsLength === 1) {
+          console.log("0000 starts");
+
           set((state) => ({
             products: [],
             totalItems: 0,
             totalPrice: 0,
           }));
-        }else if (products.length) {
+        } else if (products.length) {
           set((state) => ({
-            
+
             products: state.products.filter((product) => product.id !== item.id),
             totalItems: state.totalItems - item.quantity,
             totalPrice: +state.totalPrice - item.price,
