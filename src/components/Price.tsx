@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 
 const Price = ({ product }: { product: ProductType }) => {
-  const [total, setTotal] = useState(product.price);
+  const [total, setTotal] = useState<number>(product.price);
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
 
@@ -16,7 +16,7 @@ const Price = ({ product }: { product: ProductType }) => {
   useEffect(()=>{
     useCartStore.persist.rehydrate()
   },[])
-  
+  console.log(typeof(total));
   useEffect(() => {
     if (product.options?.length) {
       setTotal(
@@ -36,7 +36,7 @@ const Price = ({ product }: { product: ProductType }) => {
       }),
       quantity: quantity,
     })
-    console.log("prise is  ",typeof(total));
+    
     
     toast.success("The product added to the cart!")
   }

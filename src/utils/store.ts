@@ -38,21 +38,24 @@ export const useCartStore = create(
               ? {
                 ...item,
                 quantity: +item.quantity + product.quantity,
-                price: +item.price + product.price,
+                price: +Number(item.price) + Number(product.price),
               }
               : item
           );
-          set((state) => ({
+          set((state) => {
+            console.log(state.totalPrice, item.price);
+            return {
             products: updatedProducts,
             totalItems: +state.totalItems + item.quantity,
-            totalPrice: +state.totalPrice + item.price,
-          }));
+            totalPrice: Number(state.totalPrice) + Number(item.price),
+            
+          }});
         } else {
 
           set((state) => ({
             products: [...state.products, item],
             totalItems: +state.totalItems + item.quantity,
-            totalPrice: +state.totalPrice + item.price,
+            totalPrice: Number(state.totalPrice) + Number(item.price),
           }));
 
         }
