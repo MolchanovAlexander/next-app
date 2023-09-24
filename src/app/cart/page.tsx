@@ -1,7 +1,6 @@
 "use client"
 import { useCartStore } from "@/utils/store";
 import Image from "next/image";
-import { it } from "node:test";
 import React, { useEffect } from "react";
 
 const CartPage = () => {
@@ -11,6 +10,8 @@ const CartPage = () => {
     useCartStore.persist.rehydrate()
     
   },[])
+  console.log(products);
+  console.log(totalItems);
   
   
   return (
@@ -20,7 +21,7 @@ const CartPage = () => {
       <div className="h-1/2 p-4 flex flex-col justify-center overflow-scroll lg:h-full lg:w-2/3 2xl:w-1/2 lg:px-20 xl:px-40">
         {/* SINGLE ITEM */}
         {products.map((item) => (
-          <div className="flex items-center justify-between mb-4" key={item.id + item.optionTitle}>
+          <div className="flex items-center justify-between mb-4" key={item.id}>
             {item.img && (
               <Image src={item.img} alt="" width={100} height={100} />
             )}
