@@ -54,7 +54,7 @@ export const useCartStore = create(
       removeFromCart(item) {
         const productsLength = get().products.length
 
-        if (productsLength === 190) {
+        if (productsLength === 1) {
           console.log("0000 starts");
 
           set((state) => ({

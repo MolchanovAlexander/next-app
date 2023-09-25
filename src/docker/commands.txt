@@ -1,13 +1,32 @@
- 
+ my docker-compose.yml
+ services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: gufrip
+      POSTGRES_PASSWORD: randompassword
+      POSTGRES_DB: mydb
+    ports:
+      - 5432:5432
+  //////////////////////////////////////////////////////////////////    
 ---how i does backup copy of db
+    run the next commands in folder  app/src/docker
+    where the docker-compose.yml stay in my case
 
-sudo docker exec -t docker-db-1 pg_dumpall -c -U gufrip > dump_$(date +%Y-%m-%d_%H_%M_%S).sql
+ 1. sudo docker exec -t docker-db-1 pg_dumpall -c -U gufrip > dump_$(date +%Y-%m-%d_%H_%M_%S).sql
 
-// stackowerflow said:
- docker exec -t your-db-container pg_dumpall -c -U your-db-user > dump_$(date +%Y-%m-%d_%H_%M_%S).sql
+    // stackowerflow said:
+    docker exec -t your-db-container pg_dumpall -c -U your-db-user > dump_$(date +%Y-%m-%d_%H_%M_%S).sql
 
+---on a new computer you must delete previos db if it's not empty.
+ 2. docker exec -i docker-db-1 psql -U gufrip -d postgres -c "DROP DATABASE mydb;"
+then( in the root of app run $ npx prisma migrate dev)
+or (i don't check it)
+docker exec -it <container-id> psql -U <username> -d postgres -c "CREATE DATABASE <dbname>;"
 
-----how to make copy
-cat your_dump.sql | docker exec -i your-db-container psql -U your-db-user -d your-db-name
+-------------how to restore db from dump on new comp with docker -------------
+ 3. cat your_dump.sql | docker exec -i your-db-container psql -U your-db-user -d your-db-name
 it will be for me (sudo)
-cat dump_2023-09-22_09_48_07.sql | docker exec -i docker-db-1 psql -U gufrip -d mydb
+cat dump_2023-09-25_14_58_41.sql | sudo docker exec -i docker-db-1 psql -U gufrip -d mydb
