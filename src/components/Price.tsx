@@ -5,9 +5,11 @@ import { useCartStore } from "@/utils/store";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+// is used on /product/page.tsx
 
 const Price = ({ product }: { product: ProductType }) => {
-  const [total, setTotal] = useState<number>(Number(product.price));
+    
+  const [total, setTotal] = useState(product.price);
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
 
@@ -16,8 +18,7 @@ const Price = ({ product }: { product: ProductType }) => {
   useEffect(()=>{
     useCartStore.persist.rehydrate()
   },[])
-  console.log(typeof(total));
-  console.log(typeof(quantity));
+
   useEffect(() => {
     if (product.options?.length) {
       setTotal(

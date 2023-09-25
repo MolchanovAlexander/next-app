@@ -349,9 +349,12 @@ clmq5d0tp0000hjcbv5xi6act	2023-09-19 10:03:03.61	19.0000000000000000000000000000
 --
 
 COPY public."Product" (id, "createdAt", title, "desc", img, price, "isFeatured", options, "catSlug") FROM stdin;
-clmj29lho0001hjqjo8nzazgx	2023-09-14 11:02:01.74	Sicilian	Description of this dung22222 grgdffewpeoor	/temporary/p1.png	33.000000000000000000000000000000	f	{"{\\"title\\": \\"small\\", \\"additionalPrice\\": 0}","{\\"title\\": \\"medium\\", \\"additionalPrice\\": 2}","{\\"title\\": \\"large\\", \\"additionalPrice\\": 3}"}	pizzas
-clmsus3si0000hjs0mdoczmf8	2023-09-21 07:30:10.086	Burger3	desc b3	/temporary/p5.png	12.000000000000000000000000000000	t	{"{\\"title\\": \\"small\\", \\"additionalPrice\\": 0}","{\\"title\\": \\"dno\\", \\"additionalPrice\\": 1}"}	burgers
-clmsutasn0001hjs07ox7da8g	2023-09-21 07:31:05.832	pasta goya	desfrfrfrfr	/temporary/p4.png	32.000000000000000000000000000000	t	{}	pastas
+clmj29lho0001hjqjo8nzazgx	2023-09-14 11:02:01.74	Sicilian	Description of this dung22222 grgdffewpeoor	/temporary/p1.png	34.000000000000000000000000000000	t	{"{\\"title\\": \\"small\\", \\"additionalPrice\\": 0}","{\\"title\\": \\"medium\\", \\"additionalPrice\\": 2}","{\\"title\\": \\"large\\", \\"additionalPrice\\": 3}"}	pizzas
+clmyqgk5m0000hj0zsrvsqskc	2023-09-25 10:15:50.027	Burger 2	desc burger 22222 2 2 2	/temporary/p2.png	18.000000000000000000000000000000	f	{}	burgers
+clmyqjltw0002hj0zi9l42v7g	2023-09-25 10:18:12.165	Makaronezi	desc makarony sdfsdfsd	/temporary/p7.png	17.500000000000000000000000000000	f	{}	pastas
+clmsus3si0000hjs0mdoczmf8	2023-09-21 07:30:10.086	Burger3	desc b3	/temporary/p5.png	12.600000000000000000000000000000	t	{"{\\"title\\": \\"small\\", \\"additionalPrice\\": 0}","{\\"title\\": \\"dno\\", \\"additionalPrice\\": 1}"}	burgers
+clmyqhxcw0001hj0zd5rvk30n	2023-09-25 10:16:53.792	TomatoPizza	desctomatooo piiiszs	/temporary/p3.png	36.800000000000000000000000000000	f	{}	pizzas
+clmsutasn0001hjs07ox7da8g	2023-09-21 07:31:05.832	pasta goya	desfrfrfrfr	/temporary/p4.png	32.250000000000000000000000000000	t	{"{\\"title\\": \\"small\\", \\"additionalPrice\\": 0}","{\\"title\\": \\"dno\\", \\"additionalPrice\\": 2}"}	pastas
 \.
 
 

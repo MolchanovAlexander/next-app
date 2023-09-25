@@ -20,40 +20,29 @@ export const useCartStore = create(
       products: INITIAL_STATE.products,
       totalPrice: INITIAL_STATE.totalPrice,
       totalItems: INITIAL_STATE.totalItems,
-
       addToCart(item) {
-        console.log(item);
-        
         const products = get().products;
-        const totalP = get().totalPrice;
-        const productsLength = products.length
-        const toi = get().totalItems
-        
         const productInState = products.find((product) => product.id === item.id);
-        console.log(productInState , "  in state");
-        
+
         if (productInState) {
-          console.log(productInState.id, productInState.img, " if in state");
-          
-          const updatedProducts = products.map((product) =>
-            product.id === productInState.id
-              ? {
+          const updatedProducts = products.map((product) => {
+            if (product.id === productInState.id) {
+              return {
                 ...item,
                 quantity: item.quantity + product.quantity,
                 price: item.price + product.price,
               }
-              : item
+            } else {
+              return product
+            }
+          }
           );
-          set((state) => {
-            console.log(state.totalPrice, item.price);
-            return {
+          set((state) => ({
             products: updatedProducts,
             totalItems: state.totalItems + item.quantity,
             totalPrice: state.totalPrice + item.price,
-            
-          }});
+          }));
         } else {
-
           set((state) => ({
             products: [...state.products, item],
             totalItems: state.totalItems + item.quantity,
@@ -63,13 +52,9 @@ export const useCartStore = create(
         }
       },
       removeFromCart(item) {
-        const products = get().products;
-        const totalP = get().totalPrice;
-        const toi = get().totalItems
-        const productsLength = products.length
-        console.log(typeof (totalP) + " remove " + productsLength + " toi - " + toi);
+        const productsLength = get().products.length
 
-        if (productsLength === 1) {
+        if (productsLength === 190) {
           console.log("0000 starts");
 
           set((state) => ({
@@ -77,12 +62,11 @@ export const useCartStore = create(
             totalItems: 0,
             totalPrice: 0,
           }));
-        } else if (products.length) {
+        } else {
           set((state) => ({
-
             products: state.products.filter((product) => product.id !== item.id),
             totalItems: state.totalItems - item.quantity,
-            totalPrice: +state.totalPrice - item.price,
+            totalPrice: state.totalPrice - item.price,
           }));
 
         }

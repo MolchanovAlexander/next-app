@@ -9,7 +9,7 @@ export const GET = async (
   { params }: { params: { id: string } }
 ) => {
   const { id } = params;
-  console.log(id);
+ 
 
   try {
     const product = await prisma.product.findUnique({
