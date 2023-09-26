@@ -3,6 +3,7 @@ import React from "react";
 //import CountDown from "./CountDown"; issues the error text did not match (second on server 13 on client side 14)
 // from https://nextjs.org/docs/messages/react-hydration-error this is the solution
 import dynamic from 'next/dynamic'
+import Link from "next/link";
  
 const CountDownNoSSR = dynamic(() => import('./CountDown'), { ssr: false })
  
@@ -28,7 +29,7 @@ const Offer = () => {
           of empowerment. Quickly pontificate parallel.
         </p>
         <CountDown />
-        <button className="bg-red-500 text-white rounded-md py-3 px-6">Order Now</button>
+        <Link href={`/`} className="bg-red-500 text-white rounded-md py-3 px-6">Order Now</Link >
       </div>
       {/* IMAGE CONTAINER */}
       <div className="flex-1 w-full relative md:h-full">

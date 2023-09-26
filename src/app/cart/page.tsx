@@ -15,7 +15,8 @@ const CartPage = () => {
   return (
     <div className="h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col
      text-red-500 lg:flex-row">
-    {/* PRODUCTS CONTAINER */}
+    {/* PRODUCTS CONTAINER 
+    justify content interfere to show all div's in container( all products in cart )*/}
     <div className="h-1/2 p-4 flex flex-col  overflow-scroll lg:h-full lg:w-2/3 2xl:w-1/2 lg:px-20 xl:px-40">
       {/* SINGLE ITEM */}
       {products.map((item) => (

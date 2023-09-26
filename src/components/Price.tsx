@@ -8,8 +8,7 @@ import { toast } from "react-toastify";
 // is used on /product/page.tsx
 
 const Price = ({ product }: { product: ProductType }) => {
-    console.log(product);
-    
+       
   const [total, setTotal] = useState(product.price);
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
@@ -73,7 +72,7 @@ const Price = ({ product }: { product: ProductType }) => {
             >
               {"<"}
             </button>
-            <span>{quantity}</span>
+            <span className="w-2.5">{quantity}</span>
             <button
               onClick={() => setQuantity((prev) => (prev < 9 ? prev + 1 : 9))}
             >
