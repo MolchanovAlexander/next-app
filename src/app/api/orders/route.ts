@@ -29,26 +29,28 @@ export const GET = async (req: NextRequest) => {
   }
 
 };
+// CREATE ORDER
 export const POST = async (req: NextRequest) => {
-  try {
-    const body = await req.json();
-    const product = await prisma.product.create({
-      data: body,
-    });
-    return new NextResponse(JSON.stringify(product), { status: 201 });
-  } catch (err) {
-    console.log(err);
+  const session = await getAuthSession();
+
+  if (session) {
+    try {
+      const body = await req.json();
+      const order = await prisma.order.create({
+        data: body,
+      });
+      return new NextResponse(JSON.stringify(order), { status: 201 });
+    } catch (err) {
+      console.log(err);
+      return new NextResponse(
+        JSON.stringify({ message: "Something went wrong!" }),
+        { status: 500 }
+      );
+    }
+  } else {
     return new NextResponse(
-      JSON.stringify({ message: "Something went wrong!" }),
-      { status: 500 }
+      JSON.stringify({ message: "You are not authenticated!" }),
+      { status: 401 }
     );
   }
 };
-
-// // fetch
-// export const GET =()=> {
-//     return new NextResponse(":noob", {status:200}) 
-// }
-// export const POST =()=> {
-//     return new NextResponse(":noob", {status:200}) 
-// }
