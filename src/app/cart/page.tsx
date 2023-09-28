@@ -10,6 +10,7 @@ const CartPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
+
   useEffect(() => {
     useCartStore.persist.rehydrate();
   }, []);

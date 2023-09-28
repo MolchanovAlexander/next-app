@@ -16,7 +16,7 @@ export const PUT = async ({ params }: { params: { intentId: string } }) => {
       { status: 200 }
     );
   } catch (err) {
-    console.log(err);
+    console.log(err, "confirm intent");
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }

@@ -1,5 +1,5 @@
 "use client";
-
+// PAY PAY PAY  ------ PAAAYYYYY
 import CheckoutForm from "@/components/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { StripeElementsOptions, loadStripe } from "@stripe/stripe-js";
@@ -24,6 +24,8 @@ const PayPage = ({ params }: { params: { id: string } }) => {
           }
         );
         const data = await res.json();
+        console.log(data);
+        
         setClientSecret(data.clientSecret);
       } catch (err) {
         console.log(err);

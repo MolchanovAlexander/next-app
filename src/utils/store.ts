@@ -30,7 +30,7 @@ export const useCartStore = create(
               return {
                 ...item,
                 quantity: item.quantity + product.quantity,
-                price: item.price + product.price,
+                price: Number((item.price + product.price).toFixed(2)),
               }
             } else {
               return product
@@ -40,13 +40,13 @@ export const useCartStore = create(
           set((state) => ({
             products: updatedProducts,
             totalItems: state.totalItems + item.quantity,
-            totalPrice: state.totalPrice + item.price,
+            totalPrice: Number((state.totalPrice + item.price).toFixed(2)),
           }));
         } else {
           set((state) => ({
             products: [...state.products, item],
             totalItems: state.totalItems + item.quantity,
-            totalPrice: state.totalPrice + item.price,
+            totalPrice: Number((state.totalPrice + item.price).toFixed(2)),
           }));
 
         }
@@ -66,7 +66,7 @@ export const useCartStore = create(
           set((state) => ({
             products: state.products.filter((product) => product.id !== item.id),
             totalItems: state.totalItems - item.quantity,
-            totalPrice: state.totalPrice - item.price,
+            totalPrice: +((state.totalPrice - item.price).toFixed(2)),
           }));
 
         }
