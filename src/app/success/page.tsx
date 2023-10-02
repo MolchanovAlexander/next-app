@@ -4,19 +4,22 @@ import React, { useEffect } from "react";
 import ConfettiExplosion from "react-confetti-explosion";
 
 const SuccessPage = () => {
-  const router = useRouter();
+
   const searchParams = useSearchParams();
   const payment_intent = searchParams.get("payment_intent");
-
+  const router = useRouter();
+  console.log('\x1b[33m%s\x1b[0m',payment_intent + " success ---");
+  
   useEffect(() => {
     const makeRequest = async () => {
       try {
+                
         await fetch(`http://localhost:3000/api/confirm/${payment_intent}`, {
           method: "PUT",
         });
         setTimeout(() => {
           router.push("/orders");
-        }, 5000);
+        }, 3000);
       } catch (err) {
         console.log(err);
       }
@@ -32,8 +35,8 @@ const SuccessPage = () => {
           Payment successful. You are being redirected to the orders page.
           Please do not close the page.
         </p>
-      <ConfettiExplosion className="absolute m-auto"
-      />
+        <ConfettiExplosion className="absolute m-auto"
+        />
       </div>
     </>
   );

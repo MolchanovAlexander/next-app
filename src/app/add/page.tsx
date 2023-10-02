@@ -76,6 +76,8 @@ const AddPage = () => {
     });
 
     const resData = await res.json();
+    console.log(resData);
+    
     return resData.url;
   };
 
@@ -103,7 +105,7 @@ const AddPage = () => {
 
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)]
-     md:h-[calc(100vh-9rem)] flex items-center justify-center text-red-500">
+     md:h-[calc(100vh-9rem)] flex  justify-center text-red-500">
       <form onSubmit={handleSubmit} className="flex flex-wrap gap-6">
         <h1 className="text-4xl mb-2 text-gray-300 font-bold">
           Add New Product

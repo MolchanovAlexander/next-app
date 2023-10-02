@@ -28,7 +28,7 @@ const OrdersPage = () => {
   const mutation = useMutation({
     mutationFn: ({ id, status }: { id: string; status: string }) => {
       return fetch(`http://localhost:3000/api/orders/${id}`, {
-        method:"PUT",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },

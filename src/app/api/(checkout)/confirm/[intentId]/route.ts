@@ -1,9 +1,14 @@
 import { prisma } from "@/utils/connect";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const PUT = async ({ params }: { params: { intentId: string } }) => {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { intentId: string } }) {
   const { intentId } = params;
-
+  
+  // console.log('\x1b[33m%s\x1b[0m', 'count: %d', params);
+  // console.log('count: %2d', i);
+  
   try {
     await prisma.order.update({
       where: {
@@ -16,7 +21,7 @@ export const PUT = async ({ params }: { params: { intentId: string } }) => {
       { status: 200 }
     );
   } catch (err) {
-    console.log(err, "confirm intent");
+    console.log(err);
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }

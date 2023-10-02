@@ -24,7 +24,7 @@ const CartPage = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            price: totalPrice,
+            price: +(totalPrice.toFixed(2)),
             products,
             status: "Not Paid!",
             userEmail: session.user.email,
