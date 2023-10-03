@@ -74,9 +74,9 @@ const AddPage = () => {
       headers: { "Content-Type": "multipart/form-data" },
       body: data,
     });
-
+    console.log(res);
     const resData = await res.json();
-    console.log(resData);
+    
     
     return resData.url;
   };
@@ -85,11 +85,11 @@ const AddPage = () => {
     e.preventDefault();
 
     try {
-      const url = await upload();
+      //const url = await upload();
       const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         body: JSON.stringify({
-          img: url,
+          img: null,
           ...inputs,
           options,
         }),
@@ -104,8 +104,7 @@ const AddPage = () => {
   };
 
   return (
-    <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)]
-     md:h-[calc(100vh-9rem)] flex  justify-center text-red-500">
+    <div className="p-4 lg:px-20 xl:px-40 flex  justify-center text-red-500 ">
       <form onSubmit={handleSubmit} className="flex flex-wrap gap-6">
         <h1 className="text-4xl mb-2 text-gray-300 font-bold">
           Add New Product
@@ -182,12 +181,12 @@ const AddPage = () => {
               name="additionalPrice"
               onChange={changeOption}
             />
-            <button
+            <div
               className="bg-gray-500 p-2 text-white"
               onClick={() => setOptions((prev) => [...prev, option])}
             >
               Add Option
-            </button>
+            </div>
           </div>
           <div className="flex flex-wrap gap-4 mt-2">
             {options.map((opt) => (

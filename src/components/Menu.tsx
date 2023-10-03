@@ -40,9 +40,9 @@ export default function Menu() {
             Orders
           </Link>
         )}
-        <Link href="/cart" onClick={() => { setOpen(false); console.log("cart") }}>
+        <div  onClick={() => { setOpen(false); console.log("cart") }}>
           <CartIcon />
-        </Link>
+        </div>
       </div>}
     </div>
   )

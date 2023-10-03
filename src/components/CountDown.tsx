@@ -16,10 +16,11 @@
 
 // WITHOUT A LIBRARY
 "use client"
+
 import React, { useState, useEffect } from "react";
 
 const CountDown = () => {
-  
+
   let difference = +new Date(`10/10/2023`) - +new Date();
   const [delay, setDelay] = useState(difference);
 
@@ -40,10 +41,13 @@ const CountDown = () => {
     return () => {
       clearInterval(timer);
     };
-  },[difference]);
+  }, [difference]);
   return (
     <span className="font-bold text-5xl text-yellow-300">
-      {d}:{h}:{m}:{s}
+      {d < 10 ? "0" + d : d}
+      :{h < 10 ? "0" + h : h}
+      :{m < 10 ? "0" + m : m}
+      :{s < 10 ? "0" + s : s}
     </span>
   );
 };

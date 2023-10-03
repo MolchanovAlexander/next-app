@@ -52,24 +52,20 @@ export const useCartStore = create(
         }
       },
       removeFromCart(item) {
-        const productsLength = get().products.length
 
-        if (productsLength === 1) {
-          console.log("0000 starts");
-
-          set((state) => ({
-            products: [],
-            totalItems: 0,
-            totalPrice: 0,
-          }));
-        } else {
-          set((state) => ({
-            products: state.products.filter((product) => product.id !== item.id),
-            totalItems: state.totalItems - item.quantity,
-            totalPrice: +((state.totalPrice - item.price).toFixed(2)),
-          }));
-
-        }
+        set((state) => ({
+          products: state.products.filter((product) => product.id !== item.id),
+          totalItems: state.totalItems - item.quantity,
+          totalPrice: +((state.totalPrice - item.price).toFixed(2)),
+        }));
+      },
+      clearCart() {
+        console.log("0000 set");
+        set(() => ({
+          products: [],
+          totalItems: 0,
+          totalPrice: 0,
+        }));
       },
     }),
     { name: "cart", skipHydration: true }

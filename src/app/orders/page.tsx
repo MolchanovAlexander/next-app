@@ -71,7 +71,7 @@ const OrdersPage = () => {
               <td className="py-6 px-1">
                 {item.createdAt.toString().slice(0, 10)}
               </td>
-              <td className="py-6 px-1">{item.price}</td>
+              <td className="py-6 px-1">{item.price.toFixed(2)}</td>
               <td className="hidden md:block py-6 px-1">
                 {item.products[0].title}
               </td>

@@ -4,20 +4,22 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 const LoginPage = () => {
-  const {data, status} = useSession()
+  const { data, status } = useSession()
   const router = useRouter()
 
-  console.log("data - " + data);
-  console.log("status - " + status);
-  if(status==="loading"){
+  if (status === "loading") {
     return <p>Loading///</p>
   }
-  if(status==="authenticated"){
-    router.push("/")
-  }
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      router.push("/")
+    }
+
+  }, [status])
 
 
   return (
@@ -28,14 +30,14 @@ const LoginPage = () => {
       md:flex-row md:h-[70%] md:w-full lg:w-[60%] 2xl:w-1/2">
         {/* IMAGE CONTAINER */}
         <div className="relative h-1/3 w-full md:h-full md:w-1/2">
-          <Image src="/loginBg.png" alt="" fill className="object-cover"/>
+          <Image src="/loginBg.png" alt="" fill className="object-cover" />
         </div>
         {/* FORM CONTAINER */}
         <div className="p-10 flex flex-col gap-8 md:w-1/2">
           <h1 className="font-bold text-xl xl:text-3xl">Welcome</h1>
           <p>Log into your account or create a new one using social buttons</p>
           <button className="flex gap-4 p-4 ring-2 ring-orange-300 rounded-md "
-          onClick={()=>signIn("google")}>
+            onClick={() => signIn("google")}>
             <Image
               src="/google.png"
               alt=""

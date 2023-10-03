@@ -14,15 +14,25 @@ const Price = ({ product }: { product: ProductType }) => {
   const [selected, setSelected] = useState(0);
 
   const { addToCart } = useCartStore()
-
+  
+  console.log('%c price ',"color:red;", product.price);
+  console.log(typeof(total), " quantity ", quantity);
+  
+  
   useEffect(()=>{
     useCartStore.persist.rehydrate()
   },[])
 
   useEffect(() => {
     if (product.options?.length) {
+      console.log(product.options[selected].additionalPrice);
+      
       setTotal(
-        quantity * product.price + product.options[selected].additionalPrice
+        quantity * (product.price + product.options[selected].additionalPrice)
+      );
+    }else{
+      setTotal(
+        quantity * product.price 
       );
     }
   }, [quantity, selected, product]);
@@ -44,7 +54,7 @@ const Price = ({ product }: { product: ProductType }) => {
   }
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">${total}</h2>
+      <h2 className="text-2xl font-bold">${total.toFixed(2)}</h2>
       {/* OPTIONS CONTAINER */}
       <div className="flex gap-4">
         {product.options?.map((option, index) => (
