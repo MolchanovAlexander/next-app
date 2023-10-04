@@ -1,4 +1,5 @@
 
+import { OrderType } from "@/types/types";
 import { getAuthSession } from "@/utils/auth";
 import { prisma } from "@/utils/connect";
 import { NextRequest, NextResponse } from "next/server";
@@ -10,8 +11,14 @@ export const GET = async (req: NextRequest) => {
   if (session) {
     try {
       if(session.user.isAdmin){
-        const orders = await prisma.order.findMany()
-        console.log("%c orders","color:red;", orders);
+        const allOrders = await prisma.order.findMany()
+        const orders = allOrders.map((item) => {
+          return {
+            ...item,
+            price: item.price.toFixed(2)
+          }
+        })
+        console.log(" >>>orders--", orders,"------");
         
         return new NextResponse(JSON.stringify(orders), { status: 200 });
       }

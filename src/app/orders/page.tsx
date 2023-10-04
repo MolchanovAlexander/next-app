@@ -24,7 +24,7 @@ const OrdersPage = () => {
     queryFn: () =>
       fetch("http://localhost:3000/api/orders").then((res) => res.json()),
   });
-console.log(data);
+
 
   const queryClient = useQueryClient();
 
