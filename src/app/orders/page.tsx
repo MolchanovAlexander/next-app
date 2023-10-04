@@ -5,23 +5,26 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 
 const OrdersPage = () => {
   const { data: session, status } = useSession();
 
   const router = useRouter();
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [status])
 
-  if (status === "unauthenticated") {
-    router.push("/");
-  }
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["orders"],
     queryFn: () =>
       fetch("http://localhost:3000/api/orders").then((res) => res.json()),
   });
+console.log(data);
 
   const queryClient = useQueryClient();
 
@@ -71,7 +74,7 @@ const OrdersPage = () => {
               <td className="py-6 px-1">
                 {item.createdAt.toString().slice(0, 10)}
               </td>
-              <td className="py-6 px-1">{item.price.toFixed(2)}</td>
+              <td className="py-6 px-1">{item.price}</td>
               <td className="hidden md:block py-6 px-1">
                 {item.products[0].title}
               </td>

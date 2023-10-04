@@ -11,6 +11,8 @@ export const GET = async (req: NextRequest) => {
     try {
       if(session.user.isAdmin){
         const orders = await prisma.order.findMany()
+        console.log("%c orders","color:red;", orders);
+        
         return new NextResponse(JSON.stringify(orders), { status: 200 });
       }
       const orders = await prisma.order.findMany({

@@ -9,17 +9,17 @@ import React, { useEffect } from "react";
 const LoginPage = () => {
   const { data, status } = useSession()
   const router = useRouter()
-
-  if (status === "loading") {
-    return <p>Loading///</p>
-  }
-
   useEffect(() => {
     if (status === "authenticated") {
       router.push("/")
     }
 
   }, [status])
+  if (status === "loading") {
+    return <p>Loading///</p>
+  }
+
+
 
 
   return (
