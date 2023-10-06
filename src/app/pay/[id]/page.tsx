@@ -11,42 +11,52 @@ const stripePromise = loadStripe(
 
 const PayPage = ({ params }: { params: { id: string } }) => {
   const [clientSecret, setClientSecret] = useState("");
-
   const { id } = params;
+  const [isHydrated, setIsHydrated] = useState(false)
 
+  // Wait till Next.js rehydration completes
+  useEffect(() => {
+    setIsHydrated(true)
+    
+  }, [])
   useEffect(() => {
     const makeRequest = async () => {
+      
       try {
-        const res = await fetch(
-          `http://localhost:3000/api/create-intent/${id}`,
-          {
-            method: "POST",
-          }
-        );
-        const data = await res.json();
-        console.log(data);
-        
-        setClientSecret(data.clientSecret);
+        if (isHydrated) {
+         
+          const res = await fetch(
+            `http://localhost:3000/api/create-intent/${id}`,
+            {
+              method: "POST",
+            }
+          );
+          const data = await res.json();
+          
+
+          setClientSecret(data.clientSecret);
+        }
+
       } catch (err) {
         console.log(err);
       }
     };
 
     makeRequest();
-  }, [id]);
+  }, [id,isHydrated]);
 
-  const options:StripeElementsOptions={
+  const options: StripeElementsOptions = {
     clientSecret,
-    appearance:{
-      theme:"stripe"
+    appearance: {
+      theme: "stripe"
     }
   }
 
   return (
     <div>
       {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
-          { <CheckoutForm />}
+        <Elements options={options} key={clientSecret} stripe={stripePromise}>
+          {<CheckoutForm />}
         </Elements>
       )}
     </div>

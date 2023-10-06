@@ -1,6 +1,5 @@
 "use client";
 
-import CldUploadWidget from "@/components/ImgUpload";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -63,25 +62,25 @@ const AddPage = () => {
     const item = (target.files as FileList)[0];
     setFile(item);
   };
- 
- 
+
+// upload file to cloudinary
   const upload = async () => {
     const data = new FormData();
     data.append("file", file!);
     data.append("upload_preset", "restaurant");
-    data.append("cloud_name", "dvlngfltj")
+    //data.append("cloud_name", "dvlngfltj")
 
     const res = await fetch("https://api.cloudinary.com/v1_1/dvlngfltj/image/upload", {
       method: "POST",
-      //mode:"no-cors",
+      //mode:"no-cors", // this is wrong
       //headers: { "Content-Type": "multipart/form-data" },
       body: data,
     });
     console.log(res);
     const resData = await res.json();
-    
-    
-    
+
+
+
     return resData.url;
   };
 
@@ -91,7 +90,7 @@ const AddPage = () => {
     try {
       const url = await upload();
       console.log(url);
-      
+
       const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         body: JSON.stringify({
@@ -116,14 +115,13 @@ const AddPage = () => {
           Add New Product
         </h1>
         {/* file upload div */}
-        {/* <CldUploadWidget /> */}
         <div className="w-full flex flex-col gap-2 ">
           <label
             className="text-sm cursor-pointer flex gap-4 items-center"
             htmlFor="file"
           >
             <Image src="/upload.png" alt="" width={30} height={20} />
-            <span> old Upload Image</span>
+            <span> Upload an Image</span>
           </label>
           <input
             type="file"

@@ -14,21 +14,17 @@ const Price = ({ product }: { product: ProductType }) => {
   const [selected, setSelected] = useState(0);
 
   const { addToCart } = useCartStore()
-  
-  console.log('%c price ',"color:red;", product.price);
-  console.log(typeof(total), " quantity ", quantity);
-  
-  
+    
   useEffect(()=>{
     useCartStore.persist.rehydrate()
   },[])
 
   useEffect(() => {
     if (product.options?.length) {
-      console.log(product.options[selected].additionalPrice);
       
+      // from created products arrive string - adPrice instead number it is somwhere in db
       setTotal(
-        quantity * (product.price + product.options[selected].additionalPrice)
+        quantity * (product.price + +(product.options[selected].additionalPrice))
       );
     }else{
       setTotal(

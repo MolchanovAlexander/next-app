@@ -218,7 +218,7 @@ CREATE TABLE public."Category" (
 ALTER TABLE public."Category" OWNER TO gufrip;
 
 --
--- Name: Order; Type: TABLE; Schema: public; Owner: gufrip
+-- Name: Order; Type: TABLE; Schema: public; Owner: gufrip //// ---------------------
 --
 
 CREATE TABLE public."Order" (

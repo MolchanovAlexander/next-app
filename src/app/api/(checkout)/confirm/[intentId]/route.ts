@@ -6,7 +6,7 @@ export async function PUT(
   { params }: { params: { intentId: string } }) {
   const { intentId } = params;
   
-  // console.log('\x1b[33m%s\x1b[0m', 'count: %d', params);
+  //console.log('\x1b[33m%s\x1b[0m',  intentId);
   // console.log('count: %2d', i);
   
   try {

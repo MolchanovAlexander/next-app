@@ -1,12 +1,11 @@
 "use client"
 import { useCartStore } from "@/utils/store";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
 const CartIcon = () => {
-  const { data } = useSession();
+  
   const { totalItems } = useCartStore()
   useEffect(() => {
     useCartStore.persist.rehydrate()
@@ -20,12 +19,7 @@ const CartIcon = () => {
         </div>
         <span>Cart ({totalItems})</span>
       </Link>
-      <div className="flex justify-end min-w-30">
-
-        {data?.user.image
-          ? <Image className="rounded min-w-30" src={data?.user.image} alt="/noob.png" width={30} height={30} />
-          : <Image className="rounded" src="/noob.png" alt="/noob.png" width={30} height={30} />}
-      </div>
+      
     </div>
   );
 };

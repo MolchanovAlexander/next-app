@@ -56,7 +56,8 @@ const SingleProductPage = async ({ params }: { params: { id: string } }) => {
 export default SingleProductPage;
 /* this is response res.json()
  where price is string passed  in to <Price> 
-need to transform type to number
+need to transform type to number because 
+some troubles in db response from Decimal to JS number
 {
   id: 'clmsutasn0001hjs07ox7da8g',
   createdAt: '2023-09-21T07:31:05.832Z',

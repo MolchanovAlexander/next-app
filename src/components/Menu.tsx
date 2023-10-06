@@ -3,23 +3,29 @@ import Image from "next/image"
 import Link from "next/link";
 import { useState } from "react"
 import CartIcon from "./CartIcon";
+import { signOut, useSession } from "next-auth/react";
+import { useCartStore } from "@/utils/store";
 
 const links = [
   { id: 1, title: "Homepage", url: "/" },
   { id: 2, title: "Menu", url: "/menu" },
   { id: 3, title: "Contacts", url: "/contacts" },
-  
+  { id: 4, title: "orders", url: "/orders" }
 ];
 
 export default function Menu() {
   const [open, setOpen] = useState(false)
-  // TEMPORARY
-  const user = false;
+  const { status } = useSession();
+  const { clearCart } = useCartStore()
+  const handleLogOut = () => {
+    signOut()
+    clearCart()
+  }
 
   return (
     <div>
-      {!open ? (<Image src="/open.png" alt="" width={20} height={20} onClick={() => {
-        setOpen(true); console.log("TOGGLE");
+      {!open ? (<Image className="cursor-pointer" src="/open.png" alt="" width={20} height={20} onClick={() => {
+        setOpen(true);
       }} />
       ) : (
         <Image src="/close.png" alt="" width={20} height={20} onClick={() => setOpen(false)} />
@@ -31,16 +37,15 @@ export default function Menu() {
             {item.title}
           </Link>))}
         {/* LONG WAY */}
-        {!user ? (
-          <Link href="/login" onClick={() => { setOpen(false); console.log("login") }}>
-            Login
-          </Link>
+        {status === "authenticated" ? (
+          <div>
+
+            <span className="ml-4 cursor-pointer" onClick={handleLogOut}>Logout</span>
+          </div>
         ) : (
-          <Link href="/orders" onClick={() => { setOpen(false); console.log("orders") }}>
-            Orders
-          </Link>
+          <Link href="/login">Login</Link>
         )}
-        <div  onClick={() => { setOpen(false); console.log("cart") }}>
+        <div onClick={() => { setOpen(false); console.log("cart") }}>
           <CartIcon />
         </div>
       </div>}
