@@ -26,7 +26,7 @@ const getData = async (id: string) => {
 const SingleProductPage = async ({ params }: { params: { id: string } }) => {
 
   const singleProduct: ProductType = await getData(params.id)
-  console.log(singleProduct);
+  
   
   
   return (
