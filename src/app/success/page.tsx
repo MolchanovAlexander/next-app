@@ -17,7 +17,7 @@ const SuccessPage = () => {
     const makeRequest = async () => {
       try {
                 
-        const res = await fetch(`http://localhost:3000/api/confirm/${payment_intent}`, {
+        await fetch(`http://localhost:3000/api/confirm/${payment_intent}`, {
           method: "PUT",
         });
         
