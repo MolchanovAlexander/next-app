@@ -22,6 +22,14 @@ const getData = async (id: string) => {
   }
 
 }
+// nextjs way to dynamic change of metadata
+export async function generateMetadata({params}:any) {
+  const singleProduct: ProductType = await getData(params.id)
+  return {
+    title: singleProduct.title,
+    description: singleProduct.desc || null
+  }
+}
 
 const SingleProductPage = async ({ params }: { params: { id: string } }) => {
 
