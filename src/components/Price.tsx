@@ -48,9 +48,14 @@ const Price = ({ product }: { product: ProductType }) => {
     
     toast.success("The product added to the cart!")
   }
+  const f = new Intl.NumberFormat(undefined,{
+    maximumFractionDigits: 2,
+    minimumFractionDigits:2
+    
+  })
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">${total.toFixed(2)}</h2>
+      <h2 className="text-2xl font-bold">${f.format(total)}</h2>
       {/* OPTIONS CONTAINER */}
       <div className="flex gap-4">
         {product.options?.map((option, index) => (

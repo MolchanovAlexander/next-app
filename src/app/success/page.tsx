@@ -9,7 +9,7 @@ const SuccessPage = () => {
   const searchParams = useSearchParams();
   const payment_intent = searchParams.get("payment_intent");
   const router = useRouter();
-  
+  const [isExploding, setIsExploding] = React.useState(false);
   
   
   const { clearCart } = useCartStore()
@@ -42,8 +42,7 @@ const SuccessPage = () => {
           Payment successful. You are being redirected to the orders page.
           Please do not close the page.
         </p>
-        <ConfettiExplosion className="absolute m-auto"
-        />
+        {isExploding && <ConfettiExplosion className="absolute m-auto" />}
       </div>
     </>
   );

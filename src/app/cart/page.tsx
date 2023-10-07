@@ -14,7 +14,10 @@ const CartPage = () => {
   useEffect(() => {
     useCartStore.persist.rehydrate();
   }, []);
-
+ const f = new Intl.NumberFormat(undefined,{
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2
+ })
   const handleCheckout = async () => {
     if (!session) {
       router.push("/login");
@@ -24,7 +27,7 @@ const CartPage = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            price: +(totalPrice.toFixed(2)),
+            price: totalPrice,
             products,
             status: "Not Paid!",
             userEmail: session.user.email,
@@ -53,11 +56,11 @@ const CartPage = () => {
             )}
             <div className="">
               <h1 className="uppercase text-xl font-bold">
-                {item.title} x{item.quantity}
+                {item.title +" X " + item.quantity}
               </h1>
               <span>{item.optionTitle}</span>
             </div>
-            <h2 className="font-bold">${item.price.toFixed(2)}</h2>
+            <h2 className="font-bold">${f.format(item.price)}</h2>
             <span
               className="cursor-pointer"
               onClick={() => removeFromCart(item)}
@@ -73,7 +76,7 @@ const CartPage = () => {
         
         <div className="flex justify-between ">
           <span className="">Subtotal ({totalItems} items)</span>
-          <span className="">${(totalPrice.toFixed(2))}</span>
+          <span className="">${f.format(totalPrice)}</span>
         </div>
         <div className="flex justify-between">
           <span className="">Service Cost</span>
@@ -86,7 +89,7 @@ const CartPage = () => {
         <hr className="my-2" />
         <div className="flex justify-between">
           <span className="">TOTAL(INCL. VAT)</span>
-          <span className="font-bold">${totalPrice.toFixed(2)}</span>
+          <span className="font-bold">${f.format(totalPrice)}</span>
         </div>
         <button onClick={handleCheckout}
           className="bg-red-500 text-white p-3 rounded-md w-1/2 self-end">
