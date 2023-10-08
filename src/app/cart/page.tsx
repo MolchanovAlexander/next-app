@@ -1,4 +1,5 @@
 "use client";
+import { f } from "@/utils/NumberFormat";
 import { useCartStore } from "@/utils/store";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -14,10 +15,8 @@ const CartPage = () => {
   useEffect(() => {
     useCartStore.persist.rehydrate();
   }, []);
- const f = new Intl.NumberFormat(undefined,{
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2
- })
+  
+  // CREATING NEW ORDER - IN ORDERS------------------------------------------
   const handleCheckout = async () => {
     if (!session) {
       router.push("/login");
@@ -56,7 +55,7 @@ const CartPage = () => {
             )}
             <div className="">
               <h1 className="uppercase text-xl font-bold">
-                {item.title +" X " + item.quantity}
+                {item.title + " X " + item.quantity}
               </h1>
               <span>{item.optionTitle}</span>
             </div>
@@ -73,7 +72,7 @@ const CartPage = () => {
       {/* PAYMENT CONTAINER */}
       <div className="h-1/2 p-4 bg-fuchsia-50 flex flex-col gap-4 
       justify-center lg:h-full lg:w-1/3 2xl:w-1/2 lg:px-10 xl:px-20 2xl:text-xl 2xl:gap-6">
-        
+
         <div className="flex justify-between ">
           <span className="">Subtotal ({totalItems} items)</span>
           <span className="">${f.format(totalPrice)}</span>

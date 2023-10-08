@@ -17,14 +17,11 @@ const PayPage = ({ params }: { params: { id: string } }) => {
   // Wait till Next.js rehydration completes
   useEffect(() => {
     setIsHydrated(true)
-    
-  }, [])
-  useEffect(() => {
     const makeRequest = async () => {
-      
+
       try {
         if (isHydrated) {
-         
+
           const res = await fetch(
             `http://localhost:3000/api/create-intent/${id}`,
             {
@@ -32,18 +29,14 @@ const PayPage = ({ params }: { params: { id: string } }) => {
             }
           );
           const data = await res.json();
-          
-
           setClientSecret(data.clientSecret);
         }
-
       } catch (err) {
         console.log(err);
       }
     };
-
     makeRequest();
-  }, [id,isHydrated]);
+  }, [id, isHydrated]);
 
   const options: StripeElementsOptions = {
     clientSecret,
@@ -51,7 +44,6 @@ const PayPage = ({ params }: { params: { id: string } }) => {
       theme: "stripe"
     }
   }
-
   return (
     <div>
       {clientSecret && (

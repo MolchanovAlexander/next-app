@@ -1,6 +1,7 @@
 "use client";
 
 import { OrderType } from "@/types/types";
+import { f } from "@/utils/NumberFormat";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -54,11 +55,6 @@ const OrdersPage = () => {
 
   if (isLoading || status === "loading") return "Loading...";
 
-  const f = new Intl.NumberFormat("uk-UA",{
-    currency: "USD",
-    style: "currency"
-    
-  })
   return (
     <div className="p-4 lg:px-20 xl:px-40">
       <table className="w-full border-separate border-spacing-3">

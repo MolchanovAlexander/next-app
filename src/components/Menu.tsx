@@ -39,13 +39,12 @@ export default function Menu() {
         {/* LONG WAY */}
         {status === "authenticated" ? (
           <div>
-
             <span className="ml-4 cursor-pointer" onClick={handleLogOut}>Logout</span>
           </div>
         ) : (
-          <Link href="/login">Login</Link>
+          <Link onClick={() => { setOpen(false) }} href="/login">Login</Link>
         )}
-        <div onClick={() => { setOpen(false); console.log("cart") }}>
+        <div onClick={() => { setOpen(false) }}>
           <CartIcon />
         </div>
       </div>}

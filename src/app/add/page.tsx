@@ -63,27 +63,20 @@ const AddPage = () => {
     setFile(item);
   };
 
-// upload file to cloudinary
+// upload file to cloudinary --------------------------------------
   const upload = async () => {
     const data = new FormData();
     data.append("file", file!);
     data.append("upload_preset", "restaurant");
-    //data.append("cloud_name", "dvlngfltj")
-
+    
     const res = await fetch("https://api.cloudinary.com/v1_1/dvlngfltj/image/upload", {
       method: "POST",
-      //mode:"no-cors", // this is wrong
-      //headers: { "Content-Type": "multipart/form-data" },
       body: data,
-    });
-    console.log(res);
+    });   
     const resData = await res.json();
-
-
-
     return resData.url;
   };
-
+// post new product -------------------------------------------------
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -101,8 +94,8 @@ const AddPage = () => {
       });
 
       const data = await res.json();
-
       router.push(`/product/${data.id}`);
+      
     } catch (err) {
       console.log(err);
     }
