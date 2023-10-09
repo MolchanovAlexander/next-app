@@ -11,13 +11,8 @@ export const GET = async (req: NextRequest) => {
   if (session) {
     try {
       if(session.user.isAdmin){
-        const allOrders = await prisma.order.findMany()
-        const orders = allOrders.map((item) => {
-          return {
-            ...item,
-            price: item.price
-          }
-        })
+        const orders = await prisma.order.findMany()
+        
         
         return new NextResponse(JSON.stringify(orders), { status: 200 });
       }
