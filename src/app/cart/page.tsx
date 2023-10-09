@@ -10,6 +10,7 @@ const CartPage = () => {
   const { products, totalItems, totalPrice, removeFromCart } = useCartStore();
   const { data: session } = useSession();
   const router = useRouter();
+console.log(session);
 
 
   useEffect(() => {

@@ -17,7 +17,7 @@ const UserLinks = () => {
       {status === "authenticated" ? (
         <div>
           <Link href="/orders">Orders</Link>
-          <span className="ml-4 cursor-pointer" onClick={handleLogOut}>Logout</span>
+          <Link href="/"className="ml-4 cursor-pointer" onClick={handleLogOut}>Logout</Link>
         </div>
       ) : (
         <Link href="/login">Login</Link>

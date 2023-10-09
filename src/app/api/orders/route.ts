@@ -1,5 +1,4 @@
 
-import { OrderType } from "@/types/types";
 import { getAuthSession } from "@/utils/auth";
 import { prisma } from "@/utils/connect";
 import { NextRequest, NextResponse } from "next/server";
@@ -8,6 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 // FETCH ALL Orders
 export const GET = async (req: NextRequest) => {
   const session  = await getAuthSession()
+    
   if (session) {
     try {
       if(session.user.isAdmin){
@@ -15,10 +15,9 @@ export const GET = async (req: NextRequest) => {
         const orders = allOrders.map((item) => {
           return {
             ...item,
-            price: item.price.toFixed(2)
+            price: item.price
           }
         })
-        console.log(" >>>orders--", orders,"------");
         
         return new NextResponse(JSON.stringify(orders), { status: 200 });
       }
