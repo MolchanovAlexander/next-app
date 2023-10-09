@@ -10,13 +10,11 @@ const CartPage = () => {
   const { products, totalItems, totalPrice, removeFromCart } = useCartStore();
   const { data: session } = useSession();
   const router = useRouter();
-console.log(session);
-
 
   useEffect(() => {
     useCartStore.persist.rehydrate();
   }, []);
-  
+
   // CREATING NEW ORDER - IN ORDERS------------------------------------------
   const handleCheckout = async () => {
     if (!session) {
@@ -60,13 +58,15 @@ console.log(session);
               </h1>
               <span>{item.optionTitle}</span>
             </div>
-            <h2 className="font-bold">${f.format(item.price)}</h2>
-            <span
-              className="cursor-pointer"
-              onClick={() => removeFromCart(item)}
-            >
-              X
-            </span>
+            <div className="flex gap-1 ">
+              <h2 className="font-bold">${f.format(item.price)}</h2>
+              <span
+                className="cursor-pointer"
+                onClick={() => removeFromCart(item)}
+              >
+                X
+              </span>
+            </div>
           </div>
         ))}
       </div>
