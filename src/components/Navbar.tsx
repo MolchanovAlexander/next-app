@@ -29,7 +29,7 @@ export default function Navbar() {
         <Menu />
       </div>
       {/* Right Links */}
-      <div className="hidden md:flex gap-4 items-center justify-end flex-1">
+      <div className="hidden md:flex gap-4 items-center justify-end ">
         <div className="text-transparent w-[30px] h-[30px]"><UserIcon /></div>
         <div className="md:absolute top-3 r-2 lg:static flex items-center gap-2
          cursor-pointer bg-orange-300 px-1 rounded-md justify-center w-[168px]">

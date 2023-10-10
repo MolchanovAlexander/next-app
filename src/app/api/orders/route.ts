@@ -11,7 +11,14 @@ export const GET = async (req: NextRequest) => {
   if (session) {
     try {
       if(session.user.isAdmin){
-        const orders = await prisma.order.findMany()
+        const orders = await prisma.order.findMany({
+          orderBy: [
+            {
+              // asc	Sort ascending (A → Z)
+              createdAt: 'desc',
+            },
+          ]
+        })
         
         
         return new NextResponse(JSON.stringify(orders), { status: 200 });

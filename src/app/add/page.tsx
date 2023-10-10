@@ -69,7 +69,7 @@ const AddPage = () => {
     data.append("file", file!);
     data.append("upload_preset", "restaurant");
     
-    const res = await fetch("https://api.cloudinary.com/v1_1/dvlngfltj/image/upload", {
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: "POST",
       body: data,
     });   
@@ -147,7 +147,7 @@ const AddPage = () => {
           <label className="text-sm">Price</label>
           <input
             className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
-            type="number"
+            type="decimal"
             placeholder="29"
             name="price"
             onChange={handleChange}
@@ -175,7 +175,7 @@ const AddPage = () => {
             />
             <input
               className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
-              type="number"
+              type="decimal"
               placeholder="Additional Price"
               name="additionalPrice"
               onChange={changeOption}
