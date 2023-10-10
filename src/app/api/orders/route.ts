@@ -26,7 +26,13 @@ export const GET = async (req: NextRequest) => {
       const orders = await prisma.order.findMany({
         where:{
           userEmail:session.user.email!
-        }
+        },
+        orderBy: [
+          {
+            // asc	Sort ascending (A → Z)
+            createdAt: 'desc',
+          },
+        ]
       })
       return new NextResponse(JSON.stringify(orders), { status: 200 });
     } catch (err) {
