@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: 'Newbie restaurant',
   description: 'Food for newbies',
 }
-
+//export const dynamic = 'force-dynamic'
 export default function RootLayout({
   children,
 }: {

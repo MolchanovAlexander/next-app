@@ -22,3 +22,8 @@ const config: Config = {
   plugins: [],
 }
 export default config
+
+// /** @type {import('tailwindcss').Config} */
+// module.exports = {
+//   important: true,
+// }

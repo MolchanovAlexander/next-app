@@ -1,6 +1,7 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextAuthOptions, User, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "./connect";
 
@@ -24,34 +25,45 @@ const secret = process.env.NEXTAUTH_SECRET
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  secret: secret,
   session: {
     strategy: "jwt"
   },
   providers: [
     // CredentialsProvider({
-    //   id: "credentials",
+    //    id: "credentials",
     //   name: "Credentials",
+    //   credentials: {
+    //     email: {
+    //       label: "Email",
+    //       type: "text",
+    //     },
+    //     password: {
+    //       label: "Password",
+    //       type: "password",
+    //     },
+    //   },
     //   async authorize(credentials) {
-    //     //Check if the user exists.
+    //    // Check if the user exists.
     //     try {
     //       const user = await prisma.user.findUnique({
     //         where:{email: credentials.email,}
     //       });
 
-    //       // if (user) {
-    //       //   const isPasswordCorrect = await bcrypt.compare(
-    //       //     credentials.password,
-    //       //     user.password
-    //       //   );
+    //       if (user) {
+    //         const isPasswordCorrect = await bcrypt.compare(
+    //           credentials.password,
+    //           user.password
+    //         );
 
-    //       //   if (isPasswordCorrect) {
-    //       //     return user;
-    //       //   } else {
-    //       //     throw new Error("Wrong Credentials!");
-    //       //   }
-    //       // } else {
-    //       //   throw new Error("User not found!");
-    //       // }
+    //         if (isPasswordCorrect) {
+    //           return user;
+    //         } else {
+    //           throw new Error("Wrong Credentials!");
+    //         }
+    //       } else {
+    //         throw new Error("User not found!");
+    //       }
     //     } catch (err) {
     //       throw new Error(err);
     //     }
@@ -61,13 +73,17 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
     }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID!,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET!
+    })
   ],
   callbacks: {
     async session({ token, session }) {
       if (token) {
         session.user.isAdmin = token.isAdmin
       }
-     
+          
       // findMany many because userId not unique
       // return [session:{...}]
       const sessionInDb = await prisma.session.findMany({
