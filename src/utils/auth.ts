@@ -1,10 +1,10 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import bcrypt from "bcryptjs";
 import { NextAuthOptions, User, getServerSession } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
+import FacebookProvider from "next-auth/providers/facebook";
+import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "./connect";
-
 
 declare module "next-auth" {
   interface Session {
@@ -30,45 +30,60 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt"
   },
   providers: [
-    // CredentialsProvider({
-    //    id: "credentials",
-    //   name: "Credentials",
-    //   credentials: {
-    //     email: {
-    //       label: "Email",
-    //       type: "text",
-    //     },
-    //     password: {
-    //       label: "Password",
-    //       type: "password",
-    //     },
-    //   },
-    //   async authorize(credentials) {
-    //    // Check if the user exists.
-    //     try {
-    //       const user = await prisma.user.findUnique({
-    //         where:{email: credentials.email,}
-    //       });
+    CredentialsProvider({
+      id: "credentials",
+      name: "Credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "text",
+        },
+        password: {
+          label: "Password",
+          type: "string"
+        },
+      },
+      async authorize(credentials) {
+        // Check if the user exists.
+        try {
+          const user = await prisma.user.findUnique({
+            where: { email: credentials?.email, }
+          })!;
+          console.log(user);
+          if (user?.password === "null") {
+            const hashedPassword = await bcrypt.hash(credentials?.password!, 5);
+            await prisma.user.update({
+              where: { email: credentials?.email, },
+              data:{ password: hashedPassword
 
-    //       if (user) {
-    //         const isPasswordCorrect = await bcrypt.compare(
-    //           credentials.password,
-    //           user.password
-    //         );
+              }
+            })
+            return user
+          }
+          if (user!.password !== null) {
+            const isPasswordCorrect = await bcrypt.compare(
+              credentials?.password!,
+              user!.password
+            );
 
-    //         if (isPasswordCorrect) {
-    //           return user;
-    //         } else {
-    //           throw new Error("Wrong Credentials!");
-    //         }
-    //       } else {
-    //         throw new Error("User not found!");
-    //       }
-    //     } catch (err) {
-    //       throw new Error(err);
-    //     }
-    //   },
-    // }),
+            if (isPasswordCorrect) {
+              return user;
+            } else {
+              throw new Error("Wrong Credentials!");
+            }
+          } else {
+            // await prisma.user.update({
+            //   where:{
+            //     email: credentials.email!
+            //   }
+            // })
+            throw new Error("User not found!");
+          }
+        } catch (err: any) {
+          throw new Error(err);
+        }
+      },
+    }),
     GoogleProvider({
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
@@ -83,7 +98,7 @@ export const authOptions: NextAuthOptions = {
       if (token) {
         session.user.isAdmin = token.isAdmin
       }
-          
+
       // findMany many because userId not unique
       // return [session:{...}]
       const sessionInDb = await prisma.session.findMany({
@@ -97,7 +112,7 @@ export const authOptions: NextAuthOptions = {
         await prisma.session.updateMany({
           where: {
             userId: sessionInDb[0].userId,
-            },
+          },
 
           data: {
             sessionToken: token.jti,

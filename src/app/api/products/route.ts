@@ -24,6 +24,7 @@ export const GET = async (req:NextRequest) => {
     );
   }
 };
+// CREATE SINGLE PRODUCT
 export const POST = async (req: NextRequest) => {
   try {
     const body = await req.json();

@@ -41,7 +41,11 @@ export type CartType = {
   totalItems: number;
   totalPrice: number;
 };
-
+export type  InputsReg = {
+  name: string;
+  email: string;
+  password: string;
+};
 export type ActionTypes = {
   addToCart: (item: CartItemType) => void;
   removeFromCart: (item: CartItemType) => void;
