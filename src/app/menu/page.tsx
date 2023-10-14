@@ -19,7 +19,7 @@ const MenuPage = async () => {
 
   const menu: MenuType = await getData();
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-[calc(100vh-300px)]">
       <AddProductButton/>
       <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex 
     flex-col md:flex-row items-center ">
