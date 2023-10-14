@@ -63,20 +63,20 @@ const AddPage = () => {
     setFile(item);
   };
 
-// upload file to cloudinary --------------------------------------
+  // upload file to cloudinary --------------------------------------
   const upload = async () => {
     const data = new FormData();
     data.append("file", file!);
     data.append("upload_preset", "restaurant");
-    
+
     const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, {
       method: "POST",
       body: data,
-    });   
+    });
     const resData = await res.json();
     return resData.url;
   };
-// post new product -------------------------------------------------
+  // post new product -------------------------------------------------
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -95,7 +95,7 @@ const AddPage = () => {
 
       const data = await res.json();
       router.push(`/product/${data.id}`);
-      
+
     } catch (err) {
       console.log(err);
     }
