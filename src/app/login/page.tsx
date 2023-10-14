@@ -43,11 +43,6 @@ const LoginPage = () => {
       });
     };
 
-console.log(fetched);
-console.log(inputs.password);
-
-
-
 
   return (
     <div className=" h-full  flex 
