@@ -10,6 +10,7 @@ type Inputs = {
   desc: string;
   price: number;
   catSlug: string;
+  
 };
 
 type Option = {
@@ -19,13 +20,15 @@ type Option = {
 
 const AddPage = () => {
   const { data: session, status } = useSession();
+  const [featured, setFeatured] = useState(false)
   const [inputs, setInputs] = useState<Inputs>({
     title: "",
     desc: "",
     price: 0,
     catSlug: "",
+    
   });
-
+ 
   const [option, setOption] = useState<Option>({
     title: "",
     additionalPrice: 0,
@@ -82,13 +85,13 @@ const AddPage = () => {
 
     try {
       const url = await upload();
-      console.log(url);
-
+      
       const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         body: JSON.stringify({
           img: url,
           ...inputs,
+          isFeatured:featured,
           options,
         }),
       });
@@ -100,7 +103,7 @@ const AddPage = () => {
       console.log(err);
     }
   };
-
+ 
   return (
     <div className="p-4 lg:px-20 xl:px-40 flex  justify-center text-red-500 ">
       <form onSubmit={handleSubmit} className="flex flex-wrap gap-6">
@@ -163,6 +166,18 @@ const AddPage = () => {
             name="catSlug"
             onChange={handleChange}
           />
+        </div>
+        <div className="w-full flex flex-col gap-2 ">
+          <label className="text-sm">Featured</label>
+          <input className=" p-4 self-start checked:border-slate-800"
+            name="isFeatured" 
+            type="checkbox"
+            checked={featured}
+            onClick={()=>setFeatured((prev)=> !prev)}
+            readOnly
+            
+          /> 
+          
         </div>
         <div className="w-full flex flex-col gap-2">
           <label className="text-sm">Options</label>
