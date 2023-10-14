@@ -21,7 +21,7 @@ declare module "next-auth/jwt" {
 }
 
 
-//const secret = process.env.NEXTAUTH_SECRET
+const secret = process.env.NEXTAUTH_SECRET
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -29,9 +29,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt"
   },
-  // jwt: {
-  //   secret: process.env.NEXTAUTH_JWT_SECRET,
-  // },
+  
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
     CredentialsProvider({
@@ -52,15 +50,13 @@ export const authOptions: NextAuthOptions = {
         try {
           const user = await prisma.user.findUnique({
             where: { email: credentials?.email, }
-          })!;
-          console.log(user);
-          if (user?.password === "null") {
+          });
+          
+          if (user?.password === null) {
             const hashedPassword = await bcrypt.hash(credentials?.password!, 5);
             await prisma.user.update({
               where: { email: credentials?.email, },
-              data:{ password: hashedPassword
-
-              }
+              data:{ password: hashedPassword }
             })
             return user
           }
@@ -76,11 +72,7 @@ export const authOptions: NextAuthOptions = {
               throw new Error("Wrong Credentials!");
             }
           } else {
-            // await prisma.user.update({
-            //   where:{
-            //     email: credentials.email!
-            //   }
-            // })
+           
             throw new Error("User not found!");
           }
         } catch (err: any) {
@@ -110,7 +102,7 @@ export const authOptions: NextAuthOptions = {
           userId: token.sub,
         }
       })
-
+                  
       if (sessionInDb.length) {
         // update many because userId not unique
         await prisma.session.updateMany({

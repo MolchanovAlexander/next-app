@@ -3,11 +3,7 @@ import { prisma } from "@/utils/connect";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
 
-interface Body {
-    name: string;
-    email: string;
-    password: string;
-}
+
 export const POST = async (req: NextRequest) => {
     const {name, email, password} = await req.json();
     console.log(name, email, password);
