@@ -1,5 +1,6 @@
 
 import { ProductType } from "@/types/types";
+import { f } from "@/utils/NumberFormat";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -42,7 +43,7 @@ const Featured = async () => {
                 {item.title}
               </h1>
               <p className="p-1 2xl:p-8">{item.desc}</p>
-              <span className="text-xl font-bold">${item.price}</span>
+              <span className="text-xl font-bold">${f.format(item.price)}</span>
               <Link  
               href={`/product/${item.id}`} 
               className="bg-red-500 text-white p-2 rounded-md">

@@ -40,9 +40,9 @@ const AddPage = () => {
     return <p>Loading...</p>;
   }
 
-  if (status === "unauthenticated" || !session?.user.isAdmin) {
-    router.push("/");
-  }
+  // if (status === "unauthenticated" || !session?.user.isAdmin) {
+  //   router.push("/");
+  // }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -114,7 +114,8 @@ const AddPage = () => {
             htmlFor="file"
           >
             <Image src="/upload.png" alt="" width={30} height={20} />
-            <span> Upload an Image</span>
+            
+            <span> Upload an Image</span>{file &&  <img src={URL.createObjectURL(file)} alt="" className="w-10" />}
           </label>
           <input
             type="file"

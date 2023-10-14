@@ -48,6 +48,7 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         // Check if the user exists.
         try {
+          await prisma.$connect()
           const user = await prisma.user.findUnique({
             where: { email: credentials?.email, }
           });
@@ -77,6 +78,8 @@ export const authOptions: NextAuthOptions = {
           }
         } catch (err: any) {
           throw new Error(err);
+        }finally{
+          await prisma.$disconnect()
         }
       },
     }),

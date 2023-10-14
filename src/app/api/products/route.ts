@@ -1,5 +1,6 @@
 
 
+import { f } from "@/utils/NumberFormat";
 import { prisma } from "@/utils/connect";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -27,9 +28,10 @@ export const GET = async (req:NextRequest) => {
 // CREATE SINGLE PRODUCT
 export const POST = async (req: NextRequest) => {
   try {
+    prisma.$connect()
     const body = await req.json();
     const product = await prisma.product.create({
-      data: body,
+      data: {...body, price: +f.format(body.price)},
     });
    
     
@@ -40,5 +42,7 @@ export const POST = async (req: NextRequest) => {
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }
     );
+  }finally{
+    prisma.$disconnect()
   }
 };
