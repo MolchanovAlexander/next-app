@@ -1,6 +1,5 @@
 
 import { prisma } from "@/utils/connect";
-import connect from "@/utils/db";
 import { NextResponse } from "next/server";
 
 
@@ -20,12 +19,3 @@ export const GET = async () => {
     await prisma.$disconnect()
   }
 };
-
-
-// // fetch
-// export const GET =()=> {
-//     return new NextResponse(":noob", {status:200}) 
-// }
-// export const POST =()=> {
-//     return new NextResponse(":noob", {status:200}) 
-// }

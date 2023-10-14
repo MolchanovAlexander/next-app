@@ -6,11 +6,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 // FETCH ALL products
-export const GET = async (req:NextRequest) => {
+export const GET = async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
   const cat = searchParams.get("cat");
 
   try {
+    await prisma.$connect()
     const products = await prisma.product.findMany({
       where: {
         ...(cat ? { catSlug: cat } : { isFeatured: true }),
@@ -23,18 +24,20 @@ export const GET = async (req:NextRequest) => {
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }
     );
+  } finally {
+    await prisma.$disconnect()
   }
 };
 // CREATE SINGLE PRODUCT
 export const POST = async (req: NextRequest) => {
   try {
-    prisma.$connect()
+    await prisma.$connect()
     const body = await req.json();
     const product = await prisma.product.create({
-      data: {...body, price: +f.format(body.price)},
+      data: { ...body, price: +f.format(body.price) },
     });
-   
-    
+
+
     return new NextResponse(JSON.stringify(product), { status: 201 });
   } catch (err) {
     console.log(err);
@@ -42,7 +45,7 @@ export const POST = async (req: NextRequest) => {
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }
     );
-  }finally{
-    prisma.$disconnect()
+  } finally {
+    await prisma.$disconnect()
   }
 };
