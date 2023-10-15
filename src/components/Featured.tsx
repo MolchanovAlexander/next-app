@@ -7,9 +7,9 @@ import React from "react";
 
 
 const getData = async () => {
-  const res = await fetch("http://127.0.0.1:3000/api/products", {
-    cache: "no-store"
-  })
+  
+  const res = await fetch("http://localhost:3000/api/products");
+
   if (!res.ok) {
     throw new Error("Failed fetch")
   }
