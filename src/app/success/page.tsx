@@ -32,7 +32,7 @@ const SuccessPage = () => {
       }
     };
 
-    makeRequest();
+    makeRequest();setIsExploding(true)
   }, [payment_intent, router]);
 
   return (
