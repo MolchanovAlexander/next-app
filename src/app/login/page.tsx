@@ -15,7 +15,7 @@ const LoginPage = () => {
       router.push("/")
     }
 
-  }, [status])
+  }, [ router,status])
   const [fetched, setFetched] = useState(true)
   const [inputs, setInputs] = useState<InputsReg>({
     name: "",

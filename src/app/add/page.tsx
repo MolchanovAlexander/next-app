@@ -118,7 +118,7 @@ const AddPage = () => {
           >
             <Image src="/upload.png" alt="" width={30} height={20} />
 
-            <span> Upload an Image</span>{file && <img src={URL.createObjectURL(file)} alt="" className="w-10" />}
+            <span> Upload an Image</span>{file && <Image src={URL.createObjectURL(file)} alt="" className="w-10" />}
           </label>
           <input
             type="file"
