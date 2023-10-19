@@ -9,8 +9,9 @@ import 'swiper/swiper-bundle.min.css'
 export default function SlideShow  () {
   return (
     <Swiper 
+    loop={true}
     effect={"fade"}
-    className='w-full h-full' 
+    className='w-full h-full ' 
     modules={[Autoplay, Navigation,Pagination,Scrollbar,EffectFade ]}
     navigation={true}
     scrollbar={{draggable:true}}
