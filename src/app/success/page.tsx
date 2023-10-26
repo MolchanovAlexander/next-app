@@ -26,7 +26,7 @@ const SuccessPage = () => {
           router.push("/orders");
           console.log('\x1b[33m%s\x1b[0m', "--- success ---");
           clearCart();
-        }, 3000);
+        }, 2000);
       } catch (err) {
         console.log(err);
       }
