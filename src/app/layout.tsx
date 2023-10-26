@@ -10,6 +10,10 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 
+import { TelegramProvider } from "../components/TelegramProvider";
+
+
+
 //const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -24,14 +28,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-     <body className=""> 
+      <body className="">
         <AuthProvider>
           <QueryProvider>
+            <TelegramProvider>
             <Notification />
             <Navbar />
-            {children}
+            
+              {children}
+            </TelegramProvider>
+
             <Footer />
-            <ToastContainer position='bottom-right' theme='dark' autoClose={2000}/>
+            <ToastContainer position='bottom-right' theme='dark' autoClose={2000} />
           </QueryProvider>
         </AuthProvider>
       </body>

@@ -15,9 +15,10 @@ const getData = async () => {
 }
 
 const MenuPage = async () => {
-
+  
   const menu: MenuType = await getData();
-
+  
+  
   return (
     <div className="flex flex-col h-[calc(100vh-6rem)]">
       <AddProductButton/>

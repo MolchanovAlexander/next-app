@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Slideshow from "./Slideshow";
+
 const data = [
     {
         id: 1,
@@ -22,7 +23,9 @@ const data = [
 ];
 const Slider = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
-
+  
+    
+    
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlide((prev) => (prev === data.length - 1 ? 0 : prev + 1))
