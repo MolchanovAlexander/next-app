@@ -22,7 +22,7 @@ export default function SlideShow  () {
     }}
      
       slidesPerView={1}
-      onSlideChange={() => console.log('slide change')}
+     // onSlideChange={() => console.log('slide change')}
       onSwiper={(swiper) => console.log(swiper)}
     >
       <SwiperSlide><Image src="/slide1.png" alt=''fill className="object-cover" / ></SwiperSlide>
