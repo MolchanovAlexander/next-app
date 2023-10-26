@@ -7,7 +7,7 @@ import { useTelegram } from "./TelegramProvider";
 export const UserIcon = () => {
   const { data } = useSession();
   const { user, webApp } = useTelegram();
-  console.log(user);
+  //console.log(user);
   
   return (
     <div className="flex justify-end min-w-30 basis-auto ">
