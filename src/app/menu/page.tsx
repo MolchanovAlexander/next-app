@@ -5,7 +5,9 @@ import Link from "next/link";
 import React from "react";
 
 const getData = async () => {
-
+  console.log("menu fetch --- ");
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
+  
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`)
    
   if (!res.ok) {
