@@ -15,7 +15,10 @@ const UserLinks = () => {
     signOut()
     clearCart()
   }
-  webApp?.sendData("guf")
+  useEffect(()=>{
+      webApp?.sendData("guf")
+
+  },[])
   return (
     <div>
       {status === "authenticated" ? (
