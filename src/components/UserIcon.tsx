@@ -7,11 +7,11 @@ import { useTelegram } from "./TelegramProvider";
 export const UserIcon = () => {
   const { data } = useSession();
   const { user, webApp } = useTelegram();
-  console.log(user);
+  console.log(user, webApp);
   
   return (
     <div className="flex justify-end min-w-30 basis-auto ">
-      {data?.user.image ? (
+      {user?.username}{data?.user.image ? (
         <div className="rounded overflow-hidden basis-auto">
           <Image
             src={data?.user.image}
@@ -19,7 +19,7 @@ export const UserIcon = () => {
             width={30}
             height={30}
             className="w-30 h-30  !important"
-          />{user?.username}
+          />
         </div>
       ) : (
         <div className="rounded overflow-hidden">
