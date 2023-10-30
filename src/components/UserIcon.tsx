@@ -19,7 +19,7 @@ export const UserIcon = () => {
             width={30}
             height={30}
             className="w-30 h-30  !important"
-          />
+          />{user?.username}
         </div>
       ) : (
         <div className="rounded overflow-hidden">
