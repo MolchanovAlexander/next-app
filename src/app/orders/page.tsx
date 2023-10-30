@@ -1,5 +1,6 @@
 "use client";
 
+import { useTelegram } from "@/components/TelegramProvider";
 import { OrderType } from "@/types/types";
 import { f } from "@/utils/NumberFormat";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -11,7 +12,7 @@ import { toast } from "react-toastify";
 
 const OrdersPage = () => {
   const { data: session, status } = useSession();
-
+ const {user} = useTelegram()
   const router = useRouter();
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -58,6 +59,7 @@ const OrdersPage = () => {
 
   return (
     <div className="p-4 lg:px-20 xl:px-40">
+{user?.first_name}
       <table className="w-full border-separate border-spacing-3">
         <thead>
           <tr className="text-left">
@@ -87,7 +89,7 @@ const OrdersPage = () => {
                   >
                     <input
                       placeholder={item.status}
-                      className="p-2 ring-1 ring-red-100 rounded-md"
+                      className="p-2 w-full ring-1 ring-red-100 rounded-md"
                     />
                     <button className="bg-red-400 p-2 rounded-full">
                       <Image src="/edit.png" alt="" width={20} height={20} />
