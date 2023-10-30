@@ -2,16 +2,14 @@
 
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { useTelegram } from "./TelegramProvider";
 
 export const UserIcon = () => {
   const { data } = useSession();
-  const { user, webApp } = useTelegram();
-  console.log(user, webApp);
+  
   
   return (
     <div className="flex justify-end min-w-30 basis-auto ">
-      {user?.username}{data?.user.image ? (
+      {data?.user.image ? (
         <div className="rounded overflow-hidden basis-auto">
           <Image
             src={data?.user.image}
