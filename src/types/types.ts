@@ -70,6 +70,7 @@ export interface IWebApp {
   version: string;
   platform: string;
   colorScheme: string;
+  sendData: (item: any) => void;
   themeParams: {
     link_color: string;
     button_color: string;

@@ -4,17 +4,18 @@ import { useCartStore } from "@/utils/store";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useTelegram } from "./TelegramProvider";
+import { useEffect } from "react";
 
 const UserLinks = () => {
   const { status } = useSession();
   const { clearCart } = useCartStore()
-  const { user, webApp } = useTelegram();
+  const { user, webApp, } = useTelegram();
   console.log(user, webApp);
   const handleLogOut = () => {
     signOut()
     clearCart()
   }
-
+  webApp?.sendData("guf")
   return (
     <div>
       {status === "authenticated" ? (
