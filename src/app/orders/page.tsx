@@ -14,6 +14,9 @@ const OrdersPage = () => {
   const { data: session, status } = useSession();
   // telegrammm
   const { user, webApp } = useTelegram()
+  useEffect(() => {
+    webApp?.ready();
+}, [])
   const onSendData = useCallback(() => {
     const data = {
       status,

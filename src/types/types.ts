@@ -70,6 +70,7 @@ export interface IWebApp {
   version: string;
   platform: string;
   colorScheme: string;
+  ready: ()=> void;
   sendData: (item: any) => void;
   onEvent: (item:string,func:() => void) => void;
   offEvent: (item:string,func:() => void) => void;
