@@ -55,8 +55,8 @@ const OrdersPage = () => {
   };
   const handleShowButton=()=> {
     let flag = false;
-    !flag ? webApp?.MainButton.show() : webApp?.MainButton.hide(), flag = true;
-
+    flag ? webApp?.MainButton.hide() : webApp?.MainButton.show()
+    flag = !flag
   }
   if (isLoading || status === "loading") return "Loading...";
 
