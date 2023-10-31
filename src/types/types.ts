@@ -97,6 +97,7 @@ export interface IWebApp {
     isProgressVisible: boolean;
     isActive: boolean;
     show: () => void;
+    hide: () => void;
   };
   HapticFeedback: any;
 }

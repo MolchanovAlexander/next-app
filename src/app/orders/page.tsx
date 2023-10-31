@@ -53,13 +53,17 @@ const OrdersPage = () => {
     mutation.mutate({ id, status });
     toast.success("The order status has been changed!")
   };
+  const handleShowButton=()=> {
+    let flag = false;
+    !flag ? webApp?.MainButton.show() : webApp?.MainButton.hide(), flag = true;
 
+  }
   if (isLoading || status === "loading") return "Loading...";
 
 
   return (
     <div className="p-4 lg:px-20 xl:px-40">
-{user?.first_name}<button onClick={ ()=> {webApp?.MainButton.show()}}>tog</button>
+{user?.first_name}<button onClick={ handleShowButton} className="ring-1 bg-blue-500">tog</button>
       <table className="w-full border-separate border-spacing-3">
         <thead>
           <tr className="text-left">
