@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 
 const OrdersPage = () => {
   const { data: session, status } = useSession();
- const {user} = useTelegram()
+ const {user, webApp} = useTelegram()
   const router = useRouter();
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -59,7 +59,7 @@ const OrdersPage = () => {
 
   return (
     <div className="p-4 lg:px-20 xl:px-40">
-{user?.first_name}
+{user?.first_name}<button onClick={ ()=> {webApp?.MainButton.show()}}>tog</button>
       <table className="w-full border-separate border-spacing-3">
         <thead>
           <tr className="text-left">

@@ -19,7 +19,7 @@ const UserLinks = () => {
   useEffect(()=>{
       webApp?.sendData(guf)
      
-        webApp?.MainButton.show();
+      
         
     
   },[guf])
