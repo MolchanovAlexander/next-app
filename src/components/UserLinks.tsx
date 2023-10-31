@@ -11,14 +11,15 @@ const UserLinks = () => {
   const { clearCart } = useCartStore()
   const { user, webApp, } = useTelegram();
   console.log(user, webApp);
+  const guf = "guff"
   const handleLogOut = () => {
     signOut()
     clearCart()
   }
   useEffect(()=>{
-      webApp?.sendData("guf")
+      webApp?.sendData(guf)
 
-  },[])
+  },[guf])
   return (
     <div>
       {status === "authenticated" ? (
