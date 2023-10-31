@@ -71,6 +71,8 @@ export interface IWebApp {
   platform: string;
   colorScheme: string;
   sendData: (item: any) => void;
+  onEvent: (item:string,func:() => void) => void;
+  offEvent: (item:string,func:() => void) => void;
   themeParams: {
     link_color: string;
     button_color: string;

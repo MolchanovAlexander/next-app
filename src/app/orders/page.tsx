@@ -7,13 +7,30 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { toast } from "react-toastify";
 
 const OrdersPage = () => {
   const { data: session, status } = useSession();
- const {user, webApp} = useTelegram()
+  // telegrammm
+  const { user, webApp } = useTelegram()
+  const onSendData = useCallback(() => {
+    const data = {
+      status,
+      user,
+      session
+    }
+    webApp?.sendData(JSON.stringify(data));
+  }, [status, user, session])
+  useEffect(() => {
+    webApp?.onEvent('mainButtonClicked', onSendData)
+    return () => {
+      webApp?.offEvent('mainButtonClicked', onSendData)
+    }
+  }, [onSendData])
+  /// old
   const router = useRouter();
+
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/");
@@ -26,7 +43,7 @@ const OrdersPage = () => {
     queryFn: () =>
       fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/orders`).then((res) => res.json()),
   });
- 
+
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
@@ -53,19 +70,19 @@ const OrdersPage = () => {
     mutation.mutate({ id, status });
     toast.success("The order status has been changed!")
   };
-
-  if (isLoading || status === "loading") return "Loading...";
-const onToggleButton = () => {
-        if(webApp?.MainButton.isVisible) {
-            webApp?.MainButton.hide();
-        } else {
-            webApp?.MainButton.show();
-        }
+  const onToggleButton = () => {
+    if (webApp?.MainButton.isVisible) {
+      webApp?.MainButton.hide();
+    } else {
+      webApp?.MainButton.show();
     }
+  }
+  if (isLoading || status === "loading") return "Loading...";
+
 
   return (
     <div className="p-4 lg:px-20 xl:px-40">
-{user?.first_name}<button onClick={ onToggleButton} className="ring-1 bg-blue-500">tog</button>
+      {user?.first_name}<button onClick={onToggleButton} className="ring-1 bg-blue-500">tog</button>
       <table className="w-full border-separate border-spacing-3">
         <thead>
           <tr className="text-left">
