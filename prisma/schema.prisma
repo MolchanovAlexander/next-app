@@ -10,6 +10,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model movies {
+  id             Int              @id @default(autoincrement())
+  title          String
+  description    String
+  movie_sessions movie_sessions[]
+}
+
+model cinema_halls {
+  id             Int              @id @default(autoincrement())
+  capacity       Int
+  description    String
+  movie_sessions movie_sessions[]
+}
+
+model movie_sessions {
+  id            Int      @id @default(autoincrement())
+  showtime      DateTime
+  cinemahall_id Int
+  movie_id      Int
+  movie         movies   @relation(fields: [movie_id], references: [id])
+
+  cinema_halls cinema_halls @relation(fields: [cinemahall_id], references: [id])
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String
