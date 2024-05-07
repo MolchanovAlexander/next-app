@@ -18,9 +18,7 @@ export const GET = async (req: NextRequest) => {
               createdAt: 'desc',
             },
           ]
-        })
-        
-        
+        })  
         return new NextResponse(JSON.stringify(orders), { status: 200 });
       }
       const orders = await prisma.order.findMany({
@@ -36,7 +34,7 @@ export const GET = async (req: NextRequest) => {
       })
       return new NextResponse(JSON.stringify(orders), { status: 200 });
     } catch (err) {
-      console.log(err);
+      console.log(err, "-API FETCH ALL Orders");
       return new NextResponse(
         JSON.stringify({ message: "You are not auth!" }),
         { status: 401 }
@@ -44,7 +42,7 @@ export const GET = async (req: NextRequest) => {
     }
   }
 
-};
+}
 // CREATE ORDER
 export const POST = async (req: NextRequest) => {
   const session = await getAuthSession();
@@ -58,7 +56,7 @@ export const POST = async (req: NextRequest) => {
       
       return new NextResponse(JSON.stringify(order), { status: 201 });
     } catch (err) {
-      console.log(err);
+      console.log(err, "-API CREATE ORDER");
       return new NextResponse(
         JSON.stringify({ message: "Something went wrong!" }),
         { status: 500 }
@@ -70,4 +68,4 @@ export const POST = async (req: NextRequest) => {
       { status: 401 }
     );
   }
-};
+}

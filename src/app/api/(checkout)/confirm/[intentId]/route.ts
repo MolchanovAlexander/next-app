@@ -21,10 +21,10 @@ export async function PUT(
       { status: 200 }
     );
   } catch (err) {
-    console.log(err);
+    console.log(err , "intend update fail CHECKOUT");
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }
     );
   }
-};
+}

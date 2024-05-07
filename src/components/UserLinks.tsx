@@ -10,7 +10,7 @@ const UserLinks = () => {
   const { status } = useSession();
   const { clearCart } = useCartStore()
   const { user, webApp, } = useTelegram();
-  console.log(user, webApp);
+  console.log(user, webApp, "userlinks log");
   const guf = "guff"
   const handleLogOut = () => {
     signOut()

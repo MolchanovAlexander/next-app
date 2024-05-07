@@ -36,7 +36,6 @@ const AddPage = () => {
 
   const [options, setOptions] = useState<Option[]>([]);
   const [file, setFile] = useState<File>();
-
   const router = useRouter();
 
   if (status === "loading") {
@@ -53,18 +52,18 @@ const AddPage = () => {
     setInputs((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-  };
+  }
   const changeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
     setOption((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
-  };
+  }
 
   const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
     const item = (target.files as FileList)[0];
     setFile(item);
-  };
+  }
 
   // upload file to cloudinary --------------------------------------
   const upload = async () => {
@@ -78,15 +77,13 @@ const AddPage = () => {
     });
     const resData = await res.json();
     return resData.url;
-  };
+  }
   // post new product -------------------------------------------------
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const url = await upload();
-      console.log(process.env.NEXT_PUBLIC_BASE_URL);
-      
+      const url = await upload();      
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
         method: "POST",
         body: JSON.stringify({
@@ -101,9 +98,9 @@ const AddPage = () => {
       router.push(`/product/${data.id}`);
 
     } catch (err) {
-      console.log(err);
+      console.log(err, " ADD PRODUCT ERROR");
     }
-  };
+  }
  
   return (
     <div className="p-4 lg:px-20 xl:px-40 flex  justify-center text-red-500 ">
@@ -230,6 +227,6 @@ const AddPage = () => {
       </form>
     </div>
   );
-};
+}
 
 export default AddPage;

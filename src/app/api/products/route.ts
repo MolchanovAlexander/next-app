@@ -19,7 +19,7 @@ export const GET = async (req: NextRequest) => {
     });
     return new NextResponse(JSON.stringify(products), { status: 200 });
   } catch (err) {
-    console.log(err);
+    console.log(err , "-API FETCH ALL products");
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }
@@ -36,11 +36,9 @@ export const POST = async (req: NextRequest) => {
     const product = await prisma.product.create({
       data: { ...body, price: +f.format(body.price) },
     });
-
-
     return new NextResponse(JSON.stringify(product), { status: 201 });
   } catch (err) {
-    console.log(err);
+    console.log(err, "-API CREATE SINGLE PRODUCT");
     return new NextResponse(
       JSON.stringify({ message: "Something went wrong!" }),
       { status: 500 }
